@@ -175,7 +175,6 @@ class Ui_MainWindow(object):
         self.button_a.setFont(font)
         self.button_a.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         self.button_a.setObjectName("button_a")
-        self.button_a.clicked.connect(self.button_a_toggle)
 
         self.line_speed_a = QtWidgets.QLineEdit(self.splitter)
         font = QtGui.QFont()
@@ -200,7 +199,6 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
 
         self.button_a_go.setFont(font)
-        self.button_a_go.clicked.connect(self.door_a_put)
         self.button_a_go.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         self.button_a_go.setObjectName("button_a_go")
 
@@ -216,7 +214,6 @@ class Ui_MainWindow(object):
         self.button_b.setAcceptDrops(False)
         self.button_b.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         self.button_b.setObjectName("button_b")
-        self.button_b.clicked.connect(self.button_b_toggle)
 
         self.line_speed_b = QtWidgets.QLineEdit(self.splitter_2)
         font = QtGui.QFont()
@@ -238,7 +235,6 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
 
         self.button_b_go.setFont(font)
-        self.button_b_go.clicked.connect(self.door_b_put)
         self.button_b_go.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         self.button_b_go.setObjectName("button_b_go")
 
@@ -254,7 +250,6 @@ class Ui_MainWindow(object):
         self.button_c.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         self.button_c.setObjectName("button_c")
         self.line_speed_c = QtWidgets.QLineEdit(self.splitter_3)
-        self.button_c.clicked.connect(self.button_c_toggle)
 
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -275,7 +270,6 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
 
         self.button_c_go.setFont(font)
-        self.button_c_go.clicked.connect(self.door_c_put)
         self.button_c_go.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         self.button_c_go.setObjectName("button_c_go")
 
@@ -291,7 +285,6 @@ class Ui_MainWindow(object):
         self.button_d.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         self.button_d.setObjectName("button_d")
         self.line_speed_d = QtWidgets.QLineEdit(self.splitter_4)
-        self.button_d.clicked.connect(self.button_d_toggle)
 
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -312,7 +305,6 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
 
         self.button_d_go.setFont(font)
-        self.button_d_go.clicked.connect(self.door_d_put)
         self.button_d_go.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         self.button_d_go.setObjectName("button_d_go")
 
@@ -384,7 +376,6 @@ class Ui_MainWindow(object):
         self.button_reel_en.setFont(font)
         self.button_reel_en.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         self.button_reel_en.setObjectName("button_reel_en")
-        self.button_reel_en.clicked.connect(self.reel_enable)
 
         self.button_reelOff = QtWidgets.QPushButton(self.groupBox_reel)
         self.button_reelOff.setGeometry(QtCore.QRect(260, 50, 61, 20))
@@ -394,7 +385,6 @@ class Ui_MainWindow(object):
         self.button_reelOff.setAcceptDrops(False)
         self.button_reelOff.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         self.button_reelOff.setObjectName("button_reelOff")
-        self.button_reelOff.clicked.connect(self.reel_off)
 
         self.button_reel_calib = QtWidgets.QPushButton(self.groupBox_reel)
         self.button_reel_calib.setGeometry(QtCore.QRect(260, 100, 61, 20))
@@ -403,7 +393,6 @@ class Ui_MainWindow(object):
         self.button_reel_calib.setFont(font)
         self.button_reel_calib.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         self.button_reel_calib.setObjectName("button_reel_calib")
-        self.button_reel_calib.clicked.connect(self.reel_calib  )
 
         self.line_tension = QtWidgets.QLineEdit(self.groupBox_reel)
         self.line_tension.setGeometry(QtCore.QRect(101, 50, 72, 19))
@@ -430,7 +419,6 @@ class Ui_MainWindow(object):
 
         self.button_reelPanic = QtWidgets.QPushButton(self.groupBox_reel)
         self.button_reelPanic.setGeometry(QtCore.QRect(105, 210, 106, 36))
-        self.button_reelPanic.clicked.connect(self.reel_off)
 
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
@@ -571,7 +559,6 @@ class Ui_MainWindow(object):
         self.button_400V_onoff.setFont(font)
         self.button_400V_onoff.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         self.button_400V_onoff.setObjectName("button_400V_onoff")
-        self.button_400V_onoff.clicked.connect(self.button_400V_toggle)
 
         self.button_Ziehl_onoff = QtWidgets.QPushButton(self.groupBox_main)
         self.button_Ziehl_onoff.setGeometry(QtCore.QRect(230, 170, 141, 21))
@@ -581,7 +568,6 @@ class Ui_MainWindow(object):
         self.button_Ziehl_onoff.setAcceptDrops(False)
         self.button_Ziehl_onoff.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         self.button_Ziehl_onoff.setObjectName("button_Ziehl_onoff")
-        self.button_Ziehl_onoff.clicked.connect(self.button_Ziehl_toggle)
 
         self.label_sensor400_i = QtWidgets.QLabel(self.groupBox_main)
         self.label_sensor400_i.setGeometry(QtCore.QRect(231, 10, 141, 16))
@@ -686,6 +672,77 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "QuadPole"))
+        self.groupBox_doors.setTitle(_translate("MainWindow", "Doors"))
+        self.label_doors_speed.setText(_translate("MainWindow", "Speed"))
+        self.label_time.setText(_translate("MainWindow", "Time"))
+        self.button_doorsPanic.setText(_translate("MainWindow", "STOP"))
+        self.label_A.setText(_translate("MainWindow", "A"))
+        self.label_D.setText(_translate("MainWindow", "D"))
+        self.label_B.setText(_translate("MainWindow", "B"))
+        self.label_C.setText(_translate("MainWindow", "C"))
+        self.button_a.setText(_translate("MainWindow", "Open"))
+        self.line_speed_a.setToolTip(_translate("MainWindow", "Speed"))
+        self.line_speed_a.setText(_translate("MainWindow", "70"))
+        self.line_timeA.setToolTip(_translate("MainWindow", "Duration"))
+        self.line_timeA.setText(_translate("MainWindow", "15"))
+        self.button_a_go.setText(_translate("MainWindow", "GO"))
+        self.button_b.setText(_translate("MainWindow", "Open"))
+        self.line_speed_b.setToolTip(_translate("MainWindow", "Speed"))
+        self.line_speed_b.setText(_translate("MainWindow", "70"))
+        self.line_timeB.setToolTip(_translate("MainWindow", "Duration"))
+        self.line_timeB.setText(_translate("MainWindow", "15"))
+        self.button_b_go.setText(_translate("MainWindow", "GO"))
+        self.button_c.setText(_translate("MainWindow", "Open"))
+        self.line_speed_c.setToolTip(_translate("MainWindow", "Speed"))
+        self.line_speed_c.setText(_translate("MainWindow", "70"))
+        self.line_timeC.setToolTip(_translate("MainWindow", "Duration"))
+        self.line_timeC.setText(_translate("MainWindow", "15"))
+        self.button_c_go.setText(_translate("MainWindow", "GO"))
+        self.button_d.setText(_translate("MainWindow", "Open"))
+        self.line_speed_d.setToolTip(_translate("MainWindow", "Speed"))
+        self.line_speed_d.setText(_translate("MainWindow", "70"))
+        self.line_timeD.setToolTip(_translate("MainWindow", "Duration"))
+        self.line_timeD.setText(_translate("MainWindow", "15"))
+        self.button_d_go.setText(_translate("MainWindow", "GO"))
+        self.groupBox_reel.setTitle(_translate("MainWindow", "Reel"))
+        self.label_tension.setText(_translate("MainWindow", "Tension"))
+        self.label_speed_reel.setText(_translate("MainWindow", "Speed"))
+        self.button_reel_en.setText(_translate("MainWindow", "Normal"))
+        self.button_reelOff.setText(_translate("MainWindow", "OFF"))
+        self.button_reel_calib.setText(_translate("MainWindow", ">0<"))
+        self.line_tension.setToolTip(_translate("MainWindow", "Tension"))
+        self.line_tension.setText(_translate("MainWindow", "100"))
+        self.line_speed_reel.setToolTip(_translate("MainWindow", "Speed"))
+        self.line_speed_reel.setText(_translate("MainWindow", "300"))
+        self.label_cableOut.setText(_translate("MainWindow", "Cable out"))
+        self.label_cableDir.setText(_translate("MainWindow", "Direction"))
+        self.button_reelPanic.setText(_translate("MainWindow", "STOP"))
+        self.label_11.setText(_translate("MainWindow", "m"))
+        self.label_sensor220_i.setText(_translate("MainWindow", "220V - current, A"))
+        self.button_400V_onoff.setText(_translate("MainWindow", "400V OFF"))
+        self.button_Ziehl_onoff.setText(_translate("MainWindow", "Ziehl OFF"))
+        self.label_sensor400_i.setText(_translate("MainWindow", "400V - current, A"))
+        self.label_24V.setText(_translate("MainWindow", "24V"))
+        self.label_tension_out.setText(_translate("MainWindow", "Tension"))
+
+        self.button_a.clicked.connect(self.button_a_toggle)
+        self.button_a_go.clicked.connect(self.door_a_put)
+        self.button_b.clicked.connect(self.button_b_toggle)
+        self.button_b_go.clicked.connect(self.door_b_put)
+        self.button_c.clicked.connect(self.button_c_toggle)
+        self.button_c_go.clicked.connect(self.door_c_put)
+        self.button_d.clicked.connect(self.button_d_toggle)
+        self.button_d_go.clicked.connect(self.door_d_put)
+        self.button_reel_en.clicked.connect(self.reel_enable)
+        self.button_reelOff.clicked.connect(self.reel_off)
+        self.button_reel_calib.clicked.connect(self.reel_calib)
+        self.button_reelPanic.clicked.connect(self.reel_off)
+        self.button_400V_onoff.clicked.connect(self.button_400V_toggle)
+        self.button_Ziehl_onoff.clicked.connect(self.button_Ziehl_toggle)
 
 
 # DOOR A CONTROL
@@ -821,67 +878,6 @@ class Ui_MainWindow(object):
             'tension':'0', 
         })
         
-
-
-
-    def retranslateUi(self, MainWindow):
-        _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "QuadPole"))
-        self.groupBox_doors.setTitle(_translate("MainWindow", "Doors"))
-        self.label_doors_speed.setText(_translate("MainWindow", "Speed"))
-        self.label_time.setText(_translate("MainWindow", "Time"))
-        self.button_doorsPanic.setText(_translate("MainWindow", "STOP"))
-        self.label_A.setText(_translate("MainWindow", "A"))
-        self.label_D.setText(_translate("MainWindow", "D"))
-        self.label_B.setText(_translate("MainWindow", "B"))
-        self.label_C.setText(_translate("MainWindow", "C"))
-        self.button_a.setText(_translate("MainWindow", "Open"))
-        self.line_speed_a.setToolTip(_translate("MainWindow", "Speed"))
-        self.line_speed_a.setText(_translate("MainWindow", "70"))
-        self.line_timeA.setToolTip(_translate("MainWindow", "Duration"))
-        self.line_timeA.setText(_translate("MainWindow", "15"))
-        self.button_a_go.setText(_translate("MainWindow", "GO"))
-        self.button_b.setText(_translate("MainWindow", "Open"))
-        self.line_speed_b.setToolTip(_translate("MainWindow", "Speed"))
-        self.line_speed_b.setText(_translate("MainWindow", "70"))
-        self.line_timeB.setToolTip(_translate("MainWindow", "Duration"))
-        self.line_timeB.setText(_translate("MainWindow", "15"))
-        self.button_b_go.setText(_translate("MainWindow", "GO"))
-        self.button_c.setText(_translate("MainWindow", "Open"))
-        self.line_speed_c.setToolTip(_translate("MainWindow", "Speed"))
-        self.line_speed_c.setText(_translate("MainWindow", "70"))
-        self.line_timeC.setToolTip(_translate("MainWindow", "Duration"))
-        self.line_timeC.setText(_translate("MainWindow", "15"))
-        self.button_c_go.setText(_translate("MainWindow", "GO"))
-        self.button_d.setText(_translate("MainWindow", "Open"))
-        self.line_speed_d.setToolTip(_translate("MainWindow", "Speed"))
-        self.line_speed_d.setText(_translate("MainWindow", "70"))
-        self.line_timeD.setToolTip(_translate("MainWindow", "Duration"))
-        self.line_timeD.setText(_translate("MainWindow", "15"))
-        self.button_d_go.setText(_translate("MainWindow", "GO"))
-        self.groupBox_reel.setTitle(_translate("MainWindow", "Reel"))
-        self.label_tension.setText(_translate("MainWindow", "Tension"))
-        self.label_speed_reel.setText(_translate("MainWindow", "Speed"))
-        self.button_reel_en.setText(_translate("MainWindow", "Normal"))
-        self.button_reelOff.setText(_translate("MainWindow", "OFF"))
-        self.button_reel_calib.setText(_translate("MainWindow", ">0<"))
-        self.line_tension.setToolTip(_translate("MainWindow", "Tension"))
-        self.line_tension.setText(_translate("MainWindow", "100"))
-        self.line_speed_reel.setToolTip(_translate("MainWindow", "Speed"))
-        self.line_speed_reel.setText(_translate("MainWindow", "300"))
-        self.label_cableOut.setText(_translate("MainWindow", "Cable out"))
-        self.label_cableDir.setText(_translate("MainWindow", "Direction"))
-        self.button_reelPanic.setText(_translate("MainWindow", "STOP"))
-        self.label_11.setText(_translate("MainWindow", "m"))
-        self.label_sensor220_i.setText(_translate("MainWindow", "220V - current, A"))
-        self.button_400V_onoff.setText(_translate("MainWindow", "400V OFF"))
-        self.button_Ziehl_onoff.setText(_translate("MainWindow", "Ziehl OFF"))
-        self.label_sensor400_i.setText(_translate("MainWindow", "400V - current, A"))
-        self.label_24V.setText(_translate("MainWindow", "24V"))
-        self.label_tension_out.setText(_translate("MainWindow", "Tension"))
-
-        
-
     def polling(self):
         self.worker = WorkerThread()
         self.worker.start()
@@ -907,10 +903,6 @@ class WorkerThread(QThread):
             poll = requests.get(BASE + "/data?param=400v_aout&param=24v_vout&param=220vac_ain&param=load_cell", {})
             self.update_polling.emit(poll)
             time.sleep(1)
-            
-
-        
-
 
 if __name__ == "__main__":
     import sys
