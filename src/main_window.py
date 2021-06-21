@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import pyqtSignal, QObject, QThread, pyqtSignal
 from requests.models import Response
 
-BASE = "http://192.168.1.160:5000"
+BASE = "http://10.0.0.17:5000"
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
