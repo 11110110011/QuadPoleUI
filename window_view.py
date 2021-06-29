@@ -1,4 +1,10 @@
+import requests, time
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import pyqtSignal, QObject, QThread, pyqtSignal
+from requests.models import Response
+from pyqtgraph import PlotWidget
+
+BASE = "http://192.168.1.160:5000"
 
 
 class Ui_MainWindow(object):
@@ -221,13 +227,13 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.button_a.setFont(font)
         self.button_a.setObjectName("button_a")
-        self.line_speed_reel_2 = QtWidgets.QLineEdit(self.groupBox_3)
-        self.line_speed_reel_2.setGeometry(QtCore.QRect(250, 55, 76, 20))
+        self.line_timeA = QtWidgets.QLineEdit(self.groupBox_3)
+        self.line_timeA.setGeometry(QtCore.QRect(250, 55, 76, 20))
         font = QtGui.QFont()
         font.setPointSize(10)
-        self.line_speed_reel_2.setFont(font)
-        self.line_speed_reel_2.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.line_speed_reel_2.setObjectName("line_speed_reel_2")
+        self.line_timeA.setFont(font)
+        self.line_timeA.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.line_timeA.setObjectName("line_timeA")
         self.button_a_go = QtWidgets.QPushButton(self.groupBox_3)
         self.button_a_go.setGeometry(QtCore.QRect(345, 55, 67, 19))
         font = QtGui.QFont()
@@ -240,26 +246,26 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.label_9.setFont(font)
         self.label_9.setObjectName("label_9")
-        self.line_tension_2 = QtWidgets.QLineEdit(self.groupBox_3)
-        self.line_tension_2.setGeometry(QtCore.QRect(160, 55, 76, 20))
+        self.line_speed_a = QtWidgets.QLineEdit(self.groupBox_3)
+        self.line_speed_a.setGeometry(QtCore.QRect(160, 55, 76, 20))
         font = QtGui.QFont()
         font.setPointSize(10)
-        self.line_tension_2.setFont(font)
-        self.line_tension_2.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.line_tension_2.setObjectName("line_tension_2")
+        self.line_speed_a.setFont(font)
+        self.line_speed_a.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.line_speed_a.setObjectName("line_speed_a")
         self.label_10 = QtWidgets.QLabel(self.groupBox_3)
         self.label_10.setGeometry(QtCore.QRect(255, 35, 48, 13))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_10.setFont(font)
         self.label_10.setObjectName("label_10")
-        self.line_speed_reel_3 = QtWidgets.QLineEdit(self.groupBox_3)
-        self.line_speed_reel_3.setGeometry(QtCore.QRect(250, 95, 76, 20))
+        self.line_timeC_2 = QtWidgets.QLineEdit(self.groupBox_3)
+        self.line_timeC_2.setGeometry(QtCore.QRect(250, 95, 76, 20))
         font = QtGui.QFont()
         font.setPointSize(10)
-        self.line_speed_reel_3.setFont(font)
-        self.line_speed_reel_3.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.line_speed_reel_3.setObjectName("line_speed_reel_3")
+        self.line_timeC_2.setFont(font)
+        self.line_timeC_2.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.line_timeC_2.setObjectName("line_timeC_2")
         self.button_b = QtWidgets.QPushButton(self.groupBox_3)
         self.button_b.setGeometry(QtCore.QRect(70, 95, 67, 19))
         font = QtGui.QFont()
@@ -272,20 +278,20 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.button_b_go.setFont(font)
         self.button_b_go.setObjectName("button_b_go")
-        self.line_tension_3 = QtWidgets.QLineEdit(self.groupBox_3)
-        self.line_tension_3.setGeometry(QtCore.QRect(160, 95, 76, 20))
+        self.line_speed_b = QtWidgets.QLineEdit(self.groupBox_3)
+        self.line_speed_b.setGeometry(QtCore.QRect(160, 95, 76, 20))
         font = QtGui.QFont()
         font.setPointSize(10)
-        self.line_tension_3.setFont(font)
-        self.line_tension_3.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.line_tension_3.setObjectName("line_tension_3")
-        self.line_speed_reel_4 = QtWidgets.QLineEdit(self.groupBox_3)
-        self.line_speed_reel_4.setGeometry(QtCore.QRect(250, 135, 76, 20))
+        self.line_speed_b.setFont(font)
+        self.line_speed_b.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.line_speed_b.setObjectName("line_speed_b")
+        self.line_timeC = QtWidgets.QLineEdit(self.groupBox_3)
+        self.line_timeC.setGeometry(QtCore.QRect(250, 135, 76, 20))
         font = QtGui.QFont()
         font.setPointSize(10)
-        self.line_speed_reel_4.setFont(font)
-        self.line_speed_reel_4.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.line_speed_reel_4.setObjectName("line_speed_reel_4")
+        self.line_timeC.setFont(font)
+        self.line_timeC.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.line_timeC.setObjectName("line_timeC")
         self.button_c = QtWidgets.QPushButton(self.groupBox_3)
         self.button_c.setGeometry(QtCore.QRect(70, 135, 67, 19))
         font = QtGui.QFont()
@@ -298,20 +304,20 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.button_c_go.setFont(font)
         self.button_c_go.setObjectName("button_c_go")
-        self.line_tension_4 = QtWidgets.QLineEdit(self.groupBox_3)
-        self.line_tension_4.setGeometry(QtCore.QRect(160, 135, 76, 20))
+        self.line_speed_c = QtWidgets.QLineEdit(self.groupBox_3)
+        self.line_speed_c.setGeometry(QtCore.QRect(160, 135, 76, 20))
         font = QtGui.QFont()
         font.setPointSize(10)
-        self.line_tension_4.setFont(font)
-        self.line_tension_4.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.line_tension_4.setObjectName("line_tension_4")
-        self.line_speed_reel_5 = QtWidgets.QLineEdit(self.groupBox_3)
-        self.line_speed_reel_5.setGeometry(QtCore.QRect(250, 175, 76, 20))
+        self.line_speed_c.setFont(font)
+        self.line_speed_c.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.line_speed_c.setObjectName("line_speed_c")
+        self.line_timeD = QtWidgets.QLineEdit(self.groupBox_3)
+        self.line_timeD.setGeometry(QtCore.QRect(250, 175, 76, 20))
         font = QtGui.QFont()
         font.setPointSize(10)
-        self.line_speed_reel_5.setFont(font)
-        self.line_speed_reel_5.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.line_speed_reel_5.setObjectName("line_speed_reel_5")
+        self.line_timeD.setFont(font)
+        self.line_timeD.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.line_timeD.setObjectName("line_timeD")
         self.button_d = QtWidgets.QPushButton(self.groupBox_3)
         self.button_d.setGeometry(QtCore.QRect(70, 175, 67, 19))
         font = QtGui.QFont()
@@ -324,13 +330,13 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.button_d_go.setFont(font)
         self.button_d_go.setObjectName("button_d_go")
-        self.line_tension_5 = QtWidgets.QLineEdit(self.groupBox_3)
-        self.line_tension_5.setGeometry(QtCore.QRect(160, 175, 76, 20))
+        self.line_speed_d = QtWidgets.QLineEdit(self.groupBox_3)
+        self.line_speed_d.setGeometry(QtCore.QRect(160, 175, 76, 20))
         font = QtGui.QFont()
         font.setPointSize(10)
-        self.line_tension_5.setFont(font)
-        self.line_tension_5.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.line_tension_5.setObjectName("line_tension_5")
+        self.line_speed_d.setFont(font)
+        self.line_speed_d.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.line_speed_d.setObjectName("line_speed_d")
         self.button_reelPanic_2 = QtWidgets.QPushButton(self.groupBox_3)
         self.button_reelPanic_2.setGeometry(QtCore.QRect(170, 265, 111, 51))
         font = QtGui.QFont()
@@ -396,7 +402,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -423,23 +429,23 @@ class Ui_MainWindow(object):
         self.label_8.setText(_translate("MainWindow", "Speed"))
         self.groupBox_3.setTitle(_translate("MainWindow", "Doors"))
         self.button_a.setText(_translate("MainWindow", "Open"))
-        self.line_speed_reel_2.setText(_translate("MainWindow", "15"))
+        self.line_timeA.setText(_translate("MainWindow", "15"))
         self.button_a_go.setText(_translate("MainWindow", "GO"))
         self.label_9.setText(_translate("MainWindow", "Speed"))
-        self.line_tension_2.setText(_translate("MainWindow", "70"))
+        self.line_speed_a.setText(_translate("MainWindow", "70"))
         self.label_10.setText(_translate("MainWindow", "Time"))
-        self.line_speed_reel_3.setText(_translate("MainWindow", "15"))
+        self.line_timeC_2.setText(_translate("MainWindow", "15"))
         self.button_b.setText(_translate("MainWindow", "Open"))
         self.button_b_go.setText(_translate("MainWindow", "GO"))
-        self.line_tension_3.setText(_translate("MainWindow", "70"))
-        self.line_speed_reel_4.setText(_translate("MainWindow", "15"))
+        self.line_speed_b.setText(_translate("MainWindow", "70"))
+        self.line_timeC.setText(_translate("MainWindow", "15"))
         self.button_c.setText(_translate("MainWindow", "Open"))
         self.button_c_go.setText(_translate("MainWindow", "GO"))
-        self.line_tension_4.setText(_translate("MainWindow", "70"))
-        self.line_speed_reel_5.setText(_translate("MainWindow", "15"))
+        self.line_speed_c.setText(_translate("MainWindow", "70"))
+        self.line_timeD.setText(_translate("MainWindow", "15"))
         self.button_d.setText(_translate("MainWindow", "Open"))
         self.button_d_go.setText(_translate("MainWindow", "GO"))
-        self.line_tension_5.setText(_translate("MainWindow", "70"))
+        self.line_speed_d.setText(_translate("MainWindow", "70"))
         self.button_reelPanic_2.setText(_translate("MainWindow", "STOP"))
         self.label_11.setText(_translate("MainWindow", "A"))
         self.label_12.setText(_translate("MainWindow", "B"))
@@ -447,8 +453,180 @@ class Ui_MainWindow(object):
         self.label_14.setText(_translate("MainWindow", "D"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_main), _translate("MainWindow", "Main"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_graph), _translate("MainWindow", "Graph"))
-from pyqtgraph import PlotWidget
 
+        
+        self.button_a.clicked.connect(self.button_a_toggle)
+        self.button_a_go.clicked.connect(self.door_a_put)
+        self.button_b.clicked.connect(self.button_b_toggle)
+        self.button_b_go.clicked.connect(self.door_b_put)
+        self.button_c.clicked.connect(self.button_c_toggle)
+        self.button_c_go.clicked.connect(self.door_c_put)
+        self.button_d.clicked.connect(self.button_d_toggle)
+        self.button_d_go.clicked.connect(self.door_d_put)
+        self.button_reel_en.clicked.connect(self.reel_enable)
+        self.button_reelOff.clicked.connect(self.reel_off)
+        self.button_reel_calib.clicked.connect(self.reel_calib)
+        self.button_reelPanic.clicked.connect(self.reel_off)
+        self.button_400V_onoff.clicked.connect(self.button_400V_toggle)
+        self.button_Ziehl_onoff.clicked.connect(self.button_Ziehl_toggle)
+
+    # DOOR A CONTROL
+    door_a_state = 1
+    def button_a_toggle(self):
+        if self.button_a.text() == "Open":
+            self.button_a.setText("Close")
+            self.door_a_state = -1
+        else: 
+            self.button_a.setText("Open")
+            self.door_a_state = 1
+    
+    def door_a_put(self):
+        if self.door_a_state == -1:
+            requests.put(BASE + "/door_control?door=a", {
+            'velocity':'-' + self.line_speed_a.text(),
+            'duration':self.line_timeA.text()
+            })
+        else:
+            requests.put(BASE + "/door_control?door=a", {
+            'velocity':self.line_speed_a.text(),
+            'duration':self.line_timeA.text()
+            })
+
+# DOOR B CONTROL
+    door_b_state = 1
+    def button_b_toggle(self):    
+        if self.button_b.text() == "Open":
+            self.button_b.setText("Close")
+            self.door_b_state = -1
+        else: 
+            self.button_b.setText("Open")
+            self.door_b_state = 1
+    
+    def door_b_put(self):
+        if self.door_b_state == -1:
+            requests.put(BASE + "/door_control?door=b", {
+            'velocity':'-' + self.line_speed_b.text(),
+            'duration':self.line_timeB.text()
+            })
+        else:
+            requests.put(BASE + "/door_control?door=b", {
+            'velocity':self.line_speed_b.text(),
+            'duration':self.line_timeB.text()
+            })
+
+# DOOR C CONTROL
+    door_c_state = 1
+    def button_c_toggle(self):   
+        if self.button_c.text() == "Open":
+            self.button_c.setText("Close")
+            self.door_c_state = -1
+        else: 
+            self.button_c.setText("Open")
+            self.door_c_state = 1
+    
+    def door_c_put(self):
+        if self.door_c_state == -1:
+            requests.put(BASE + "/door_control?door=c", {
+            'velocity':'-' + self.line_speed_c.text(),
+            'duration':self.line_timeC.text()
+            })
+        else:
+            requests.put(BASE + "/door_control?door=c", {
+            'velocity':self.line_speed_c.text(),
+            'duration':self.line_timeC.text()
+            })
+
+# DOOR D CONTROL
+    door_d_state = 1
+    def button_d_toggle(self):  
+        if self.button_d.text() == "Open":
+            self.button_d.setText("Close")
+            self.door_d_state = -1
+        else: 
+            self.button_d.setText("Open")
+            self.door_d_state = 1
+    
+    def door_d_put(self):
+        if self.door_d_state == -1:
+            requests.put(BASE + "/door_control?door=d", {
+            'velocity':'-' + self.line_speed_d.text(),
+            'duration':self.line_timeD.text()
+            })
+        else:
+            requests.put(BASE + "/door_control?door=d", {
+            'velocity':self.line_speed_d.text(),
+            'duration':self.line_timeD.text()
+            })
+
+# 400V CONTROL
+    def button_400V_toggle(self):
+        is_on = 0      
+        if self.button_400V_onoff.text() == "400V OFF":
+            self.button_400V_onoff.setText("400V ON")
+            self.button_400V_onoff.setStyleSheet("color: rgb(255, 255, 255);background-color: rgb(0, 170, 0);")
+            is_on = 1
+        else: 
+            self.button_400V_onoff.setText("400V OFF")
+            is_on = 0
+            self.button_400V_onoff.setStyleSheet("color: rgb(0, 0, 0);background-color: rgb(222, 222, 222);")
+        requests.put(BASE + "/400v_regulator_control?is_on="+str(is_on), {})
+
+# ZIEHL CONTROL
+    def button_Ziehl_toggle(self):
+        is_on = 1      
+        if self.button_Ziehl_onoff.text() == "Ziehl OFF":
+            self.button_Ziehl_onoff.setText("Ziehl ON")
+            self.button_Ziehl_onoff.setStyleSheet("color: rgb(255, 255, 255);background-color: rgb(0, 170, 0);")
+            is_on = 0
+        else: 
+            self.button_Ziehl_onoff.setText("Ziehl OFF")
+            is_on = 1
+            self.button_Ziehl_onoff.setStyleSheet("color: rgb(0, 0, 0);background-color: rgb(222, 222, 222);")
+        requests.put(BASE + "/ZIEHL_control?enabled="+str(is_on), {})
+
+# REEL CONTROL
+    def reel_enable(self):
+        self.button_reel_en.setStyleSheet("color: rgb(255, 255, 255);background-color: rgb(0, 170, 0);")
+        requests.post(BASE + "/set_winch?mode=regular", {
+            'tension':self.line_tension.text(),    
+            'velocity':self.line_speed_reel.text()
+        })
+    
+    def reel_off(self):
+        self.button_reel_en.setStyleSheet("color: rgb(0, 0, 0);background-color: rgb(222, 222, 222);")
+        requests.post(BASE + "/set_winch?mode=disable", {
+            'tension':'0',    
+        })
+
+    def reel_calib(self):
+        requests.post(BASE + "/set_winch?mode=calib&calib_winch?set_edge=rolled", {
+            'tension':'0', 
+        })
+        
+    def polling(self):
+        self.worker = WorkerThread()
+        self.worker.start()
+        self.worker.update_polling.connect(self.polling_update)
+
+    def polling_update(self,val):
+        value_24v = round(val.json()["24v_vout"]/850*24,1)
+        self.lcd_24V.setProperty("value", value_24v)
+        value_220i = round(val.json()["220vac_ain"]/175,2)
+        self.lcd_220V_i.setProperty("value", value_220i)
+        value_400i = round((val.json()["400v_aout"]-20)/30.5,2)
+        self.lcd_400V_i.setProperty("value", value_400i)
+        value_tension = round((val.json()["load_cell"]-680)*11.2,0)
+        self.lcd_tension.setProperty("value", value_tension)
+        value_rope = round(val.json()["TotalRope"]/100,2)
+        self.lcd_cableOut.setProperty("value", value_rope)
+        self.progressBar.setProperty("value", value_rope)
+class WorkerThread(QThread):
+    update_polling = pyqtSignal(Response)
+    def run(self):
+        while True:
+            poll = requests.get(BASE + "/data?param=400v_aout&param=24v_vout&param=220vac_ain&param=load_cell", {})
+            self.update_polling.emit(poll)
+            time.sleep(0.2)
 
 if __name__ == "__main__":
     import sys

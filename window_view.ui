@@ -43,7 +43,7 @@
      <locale language="English" country="UnitedStates"/>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab_main">
      <attribute name="title">
@@ -627,7 +627,7 @@ background-color: rgb(200, 0, 0);</string>
         <string>Open</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="line_speed_reel_2">
+      <widget class="QLineEdit" name="line_timeA">
        <property name="geometry">
         <rect>
          <x>250</x>
@@ -684,7 +684,7 @@ background-color: rgb(200, 0, 0);</string>
         <string>Speed</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="line_tension_2">
+      <widget class="QLineEdit" name="line_speed_a">
        <property name="geometry">
         <rect>
          <x>160</x>
@@ -723,7 +723,7 @@ background-color: rgb(200, 0, 0);</string>
         <string>Time</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="line_speed_reel_3">
+      <widget class="QLineEdit" name="line_timeC_2">
        <property name="geometry">
         <rect>
          <x>250</x>
@@ -780,7 +780,7 @@ background-color: rgb(200, 0, 0);</string>
         <string>GO</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="line_tension_3">
+      <widget class="QLineEdit" name="line_speed_b">
        <property name="geometry">
         <rect>
          <x>160</x>
@@ -801,7 +801,7 @@ background-color: rgb(200, 0, 0);</string>
         <string>70</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="line_speed_reel_4">
+      <widget class="QLineEdit" name="line_timeC">
        <property name="geometry">
         <rect>
          <x>250</x>
@@ -858,7 +858,7 @@ background-color: rgb(200, 0, 0);</string>
         <string>GO</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="line_tension_4">
+      <widget class="QLineEdit" name="line_speed_c">
        <property name="geometry">
         <rect>
          <x>160</x>
@@ -879,7 +879,7 @@ background-color: rgb(200, 0, 0);</string>
         <string>70</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="line_speed_reel_5">
+      <widget class="QLineEdit" name="line_timeD">
        <property name="geometry">
         <rect>
          <x>250</x>
@@ -936,7 +936,7 @@ background-color: rgb(200, 0, 0);</string>
         <string>GO</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="line_tension_5">
+      <widget class="QLineEdit" name="line_speed_d">
        <property name="geometry">
         <rect>
          <x>160</x>
