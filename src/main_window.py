@@ -884,11 +884,11 @@ class Ui_MainWindow(object):
         self.worker.update_polling.connect(self.polling_update)
 
     def polling_update(self,val):
-        value_24v = round(val.json()["24v_vout"]/850*24,2)
+        value_24v = round(val.json()["24v_vout"]/850*24,1)
         self.lcd_24V.setProperty("value", value_24v)
         value_220i = round(val.json()["220vac_ain"]/175,2)
         self.lcd_220V_i.setProperty("value", value_220i)
-        value_400i = round((val.json()["400v_aout"]-68)/1000,2)
+        value_400i = round((val.json()["400v_aout"]-20)/30.5,2)
         self.lcd_400V_i.setProperty("value", value_400i)
         value_tension = round((val.json()["load_cell"]-680)*11.2,0)
         self.lcd_tension.setProperty("value", value_tension)
@@ -902,7 +902,7 @@ class WorkerThread(QThread):
         while True:
             poll = requests.get(BASE + "/data?param=400v_aout&param=24v_vout&param=220vac_ain&param=load_cell", {})
             self.update_polling.emit(poll)
-            time.sleep(1)
+            time.sleep(0.2)
 
 if __name__ == "__main__":
     import sys
