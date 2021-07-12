@@ -15,8 +15,11 @@ BASE = "http://10.0.0.17:5000"
 
 
 class MainWindow(QtWidgets.QMainWindow):
-    data = np.empty(100)
-    ptr = 0
+    data_220i = np.empty(100)
+    data_400i = np.empty(100)
+    data_tension = np.empty(100)
+    x1 = 0
+    x2 = 0
 
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
@@ -45,24 +48,52 @@ class MainWindow(QtWidgets.QMainWindow):
         self.graphicsView_1.setClipToView(True)
         self.graphicsView_1.setRange(xRange=[-100, 0])
         self.graphicsView_1.setLimits(xMax=0)
-        pen = pg.mkPen(color=(255, 0, 0))
-        self.data_line =  self.graphicsView_1.plot(pen=pen)
+
+        self.graphicsView_2.setDownsampling(mode='peak')
+        self.graphicsView_2.setClipToView(True)
+        self.graphicsView_2.setRange(xRange=[-100, 0])
+        self.graphicsView_2.setLimits(xMax=0)
+
+        self.line_220i =  self.graphicsView_1.plot(pen=pg.mkPen(color=(255, 255, 0)))
+        self.line_400i =  self.graphicsView_1.plot(pen=pg.mkPen(color=(0, 255, 255)))
+        self.line_tension =  self.graphicsView_2.plot(pen=pg.mkPen(color=(255, 0, 255)))
 
         self.timer = QTimer()
-        self.timer.timeout.connect(self.update_plot_data)
+        self.timer.timeout.connect(self.update_plot)
         self.timer.start(100)
 
 
+    def update_plot_1(self):
+        self.data_220i[self.x1] = value_220i
+        self.data_400i[self.x1] = value_400i
+        self.x1 += 1
+        if self.x1 >= self.data_220i.shape[0] and self.data_400i.shape[0]:
+            tmp1 = self.data_220i
+            tmp2 = self.data_400i
+            self.data_220i = np.empty(self.data_220i.shape[0] * 2)
+            self.data_220i[:tmp1.shape[0]] = tmp1
+            self.data_400i = np.empty(self.data_400i.shape[0] * 2)
+            self.data_400i[:tmp1.shape[0]] = tmp2
+        self.line_220i.setData(self.data_220i[:self.x1])
+        self.line_220i.setPos(-self.x1, 0)
+        self.line_400i.setData(self.data_400i[:self.x1])
+        self.line_400i.setPos(-self.x1, 0)
 
-    def update_plot_data(self):
-        self.data[self.ptr] = value_220i
-        self.ptr += 1
-        if self.ptr >= self.data.shape[0]:
-            tmp = self.data
-            self.data = np.empty(self.data.shape[0] * 10)
-            self.data[:tmp.shape[0]] = tmp
-        self.data_line.setData(self.data[:self.ptr])
-        self.data_line.setPos(-self.ptr, 0)
+    def update_plot_2(self):
+        self.data_tension[self.x2] = value_tension
+        self.x2 += 1
+        if self.x2 >= self.data_tension.shape[0]:
+            tmp = self.data_tension
+            self.data_tension = np.empty(self.data_tension.shape[0] * 2)
+            self.data_tension[:tmp.shape[0]] = tmp
+        self.line_tension.setData(self.data_tension[:self.x2])
+        self.line_tension.setPos(-self.x2, 0)
+
+    def update_plot(self):
+        self.update_plot_1()
+        self.update_plot_2()
+
+        
 
 # DOOR A CONTROL
     door_a_state = 1
@@ -203,7 +234,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.worker.update_polling.connect(self.polling_update)
 
     def polling_update(self,val):
-        global value_220i
+        global value_24v,value_220i,value_400i,value_tension
         value_24v = round(val.json()["24v_vout"]/850*24,1)
         self.lcd_24V.setProperty("value", value_24v)
         value_220i = round(val.json()["220vac_ain"]/175,2)
