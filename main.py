@@ -48,15 +48,20 @@ class MainWindow(QtWidgets.QMainWindow):
         self.graphicsView_1.setClipToView(True)
         self.graphicsView_1.setRange(xRange=[-100, 0])
         self.graphicsView_1.setLimits(xMax=0)
+        self.graphicsView_1.addLegend()
+        # styles = {'color':'r', 'font-size':'20px'}
+        self.graphicsView_1.setLabel('left', 'Current, A')
 
         self.graphicsView_2.setDownsampling(mode='peak')
         self.graphicsView_2.setClipToView(True)
         self.graphicsView_2.setRange(xRange=[-100, 0])
         self.graphicsView_2.setLimits(xMax=0)
+        self.graphicsView_2.setLabel('left', 'Tension, g')
+        self.graphicsView_2.addLegend()
 
-        self.line_220i =  self.graphicsView_1.plot(pen=pg.mkPen(color=(255, 255, 0)))
-        self.line_400i =  self.graphicsView_1.plot(pen=pg.mkPen(color=(0, 255, 255)))
-        self.line_tension =  self.graphicsView_2.plot(pen=pg.mkPen(color=(255, 0, 255)))
+        self.line_220i =  self.graphicsView_1.plot(name = "Main current, A",pen=pg.mkPen(color=(255, 255, 0)))
+        self.line_400i =  self.graphicsView_1.plot(name = "400V current, A",pen=pg.mkPen(color=(0, 255, 255)))
+        self.line_tension =  self.graphicsView_2.plot(name = "Tension",pen=pg.mkPen(color=(255, 0, 255)))
 
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_plot)
