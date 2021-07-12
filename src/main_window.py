@@ -606,7 +606,7 @@ class Ui_MainWindow(object):
         self.lcd_24V.setSegmentStyle(QtWidgets.QLCDNumber.Flat)
         self.lcd_24V.setProperty("value", 23.99)
         self.lcd_24V.setObjectName("lcd_24V")
-        self.polling()
+        # self.polling()
 
         self.lcd_220V_i = QtWidgets.QLCDNumber(self.groupBox_main)
         self.lcd_220V_i.setGeometry(QtCore.QRect(30, 30, 141, 51))
@@ -743,6 +743,7 @@ class Ui_MainWindow(object):
         self.button_reelPanic.clicked.connect(self.reel_off)
         self.button_400V_onoff.clicked.connect(self.button_400V_toggle)
         self.button_Ziehl_onoff.clicked.connect(self.button_Ziehl_toggle)
+        self.polling()
 
 
 # DOOR A CONTROL
@@ -892,9 +893,9 @@ class Ui_MainWindow(object):
         self.lcd_400V_i.setProperty("value", value_400i)
         value_tension = round((val.json()["load_cell"]-680)*11.2,0)
         self.lcd_tension.setProperty("value", value_tension)
-        value_rope = round(val.json()["TotalRope"]/100,2)
-        self.lcd_cableOut.setProperty("value", value_rope)
-        self.progressBar.setProperty("value", value_rope)
+        # value_rope = round(val.json()["TotalRope"]/100,2)
+        # self.lcd_cableOut.setProperty("value", value_rope)
+        # self.progressBar.setProperty("value", value_rope)
 
 class WorkerThread(QThread):
     update_polling = pyqtSignal(Response)

@@ -1082,7 +1082,7 @@ background-color: rgb(200, 0, 0);</string>
      <attribute name="title">
       <string>Graph</string>
      </attribute>
-     <widget class="PlotWidget" name="graphicsView">
+     <widget class="PlotWidget" name="graphicsView_1">
       <property name="geometry">
        <rect>
         <x>15</x>

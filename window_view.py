@@ -3,8 +3,16 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import pyqtSignal, QObject, QThread, pyqtSignal
 from requests.models import Response
 from pyqtgraph import PlotWidget
+# import pyqtgraph as pg
+import numpy as np
+import time
+import random as rd
+import pyqtgraph as pg
 
-BASE = "http://192.168.1.160:5000"
+
+
+# BASE = "http://192.168.1.160:5000"
+BASE = "http://10.0.0.17:5000"
 
 
 class Ui_MainWindow(object):
@@ -387,10 +395,10 @@ class Ui_MainWindow(object):
         self.tab_graph = QtWidgets.QWidget()
         self.tab_graph.setStyleSheet("background-color: rgb(217, 217, 217);")
         self.tab_graph.setObjectName("tab_graph")
-        self.graphicsView = PlotWidget(self.tab_graph)
-        self.graphicsView.setGeometry(QtCore.QRect(15, 10, 1061, 316))
-        self.graphicsView.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.graphicsView.setObjectName("graphicsView")
+        self.graphicsView_1 = PlotWidget(self.tab_graph)
+        self.graphicsView_1.setGeometry(QtCore.QRect(15, 10, 1061, 316))
+        self.graphicsView_1.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.graphicsView_1.setObjectName("graphicsView_1")
         self.graphicsView_2 = PlotWidget(self.tab_graph)
         self.graphicsView_2.setGeometry(QtCore.QRect(15, 330, 1061, 316))
         self.graphicsView_2.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -469,8 +477,19 @@ class Ui_MainWindow(object):
         self.button_reelPanic.clicked.connect(self.reel_off)
         self.button_400V_onoff.clicked.connect(self.button_400V_toggle)
         self.button_Ziehl_onoff.clicked.connect(self.button_Ziehl_toggle)
+        self.polling()
 
-    # DOOR A CONTROL
+
+
+        self.graphicsView_1.setTitle("Graph 1")
+        self.graphicsView_2.setTitle("Graph 2")
+
+
+
+    # def graph_220v_i(self):
+
+
+# DOOR A CONTROL
     door_a_state = 1
     def button_a_toggle(self):
         if self.button_a.text() == "Open":
@@ -617,9 +636,10 @@ class Ui_MainWindow(object):
         self.lcd_400V_i.setProperty("value", value_400i)
         value_tension = round((val.json()["load_cell"]-680)*11.2,0)
         self.lcd_tension.setProperty("value", value_tension)
-        value_rope = round(val.json()["TotalRope"]/100,2)
-        self.lcd_cableOut.setProperty("value", value_rope)
-        self.progressBar.setProperty("value", value_rope)
+        # value_rope = round(val.json()["TotalRope"]/100,2)
+        # self.lcd_cableOut.setProperty("value", value_rope)
+        # self.progressBar.setProperty("value", value_rope)
+
 class WorkerThread(QThread):
     update_polling = pyqtSignal(Response)
     def run(self):
