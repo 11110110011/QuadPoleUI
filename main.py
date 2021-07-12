@@ -8,21 +8,21 @@ import requests, time
 from PyQt5.QtCore import pyqtSignal, QObject, QThread, pyqtSignal, QTimer
 from requests.models import Response
 from random import randint
+import numpy as np
 
 # BASE = "http://192.168.1.160:5000"
 BASE = "http://10.0.0.17:5000"
 
+
 class MainWindow(QtWidgets.QMainWindow):
+    data = np.empty(100)
+    ptr = 0
 
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
 
-        #Load the UI Page
         uic.loadUi('window_view.ui', self)
 
-        # self.plot([1,2,3,4,5,6,7,8,9,10], [30,32,34,32,33,31,29,32,35,45])
-        self.x = list(range(100))  # 100 time points
-        self.y = [randint(0,100) for _ in range(100)]  # 100 data points
     
 
         self.button_a.clicked.connect(self.button_a_toggle)
@@ -41,26 +41,28 @@ class MainWindow(QtWidgets.QMainWindow):
         self.button_Ziehl_onoff.clicked.connect(self.button_Ziehl_toggle)
         self.polling()
 
+        self.graphicsView_1.setDownsampling(mode='peak')
+        self.graphicsView_1.setClipToView(True)
+        self.graphicsView_1.setRange(xRange=[-100, 0])
+        self.graphicsView_1.setLimits(xMax=0)
         pen = pg.mkPen(color=(255, 0, 0))
-        self.data_line =  self.graphicsView_1.plot(self.x, self.y, pen=pen)
+        self.data_line =  self.graphicsView_1.plot(pen=pen)
 
         self.timer = QTimer()
-        self.timer.setInterval(50)
         self.timer.timeout.connect(self.update_plot_data)
-        self.timer.start()
+        self.timer.start(100)
+
+
 
     def update_plot_data(self):
-
-        self.x = self.x[1:]  # Remove the first y element.
-        self.x.append(self.x[-1] + 1)  # Add a new value 1 higher than the last.
-
-        self.y = self.y[1:]  # Remove the first
-        self.y.append( randint(0,100))  # Add a new random value.
-
-        self.data_line.setData(self.x, self.y)  # Update the data.
-
-    # def plot(self, hour, temperature):
-    #     self.graphicsView_1.plot(hour, temperature)
+        self.data[self.ptr] = value_220i
+        self.ptr += 1
+        if self.ptr >= self.data.shape[0]:
+            tmp = self.data
+            self.data = np.empty(self.data.shape[0] * 10)
+            self.data[:tmp.shape[0]] = tmp
+        self.data_line.setData(self.data[:self.ptr])
+        self.data_line.setPos(-self.ptr, 0)
 
 # DOOR A CONTROL
     door_a_state = 1
@@ -201,6 +203,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.worker.update_polling.connect(self.polling_update)
 
     def polling_update(self,val):
+        global value_220i
         value_24v = round(val.json()["24v_vout"]/850*24,1)
         self.lcd_24V.setProperty("value", value_24v)
         value_220i = round(val.json()["220vac_ain"]/175,2)
@@ -219,7 +222,7 @@ class WorkerThread(QThread):
         while True:
             poll = requests.get(BASE + "/data?param=400v_aout&param=24v_vout&param=220vac_ain&param=load_cell", {})
             self.update_polling.emit(poll)
-            time.sleep(0.2)
+            time.sleep(0.1)
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
