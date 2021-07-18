@@ -1,1 +1,13 @@
 ./rtsp-simple-server
+
+
+
+Publish a stream. For instance, you can publish a video/audio file with FFmpeg:
+
+ffmpeg -re -stream_loop -1 -i file.ts -c copy -f rtsp rtsp://localhost:8554/mystream
+
+
+
+Open the stream:
+
+ffmpeg -i rtsp://localhost:8554/mystream -c copy output.mp4
