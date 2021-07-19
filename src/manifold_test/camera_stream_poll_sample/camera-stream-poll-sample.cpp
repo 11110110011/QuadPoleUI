@@ -55,6 +55,14 @@ void show_rgb(CameraRGBImage img, char* name)
 #endif
 }
 
+void emit_stream(CameraRGBBImage img)
+{
+  string str = "ffmpeg -re -i " + img + " -c:v copy -f rtsp -rtsp_transport tcp rtsp://localhost:8888";
+  const char *command = str.c_str();
+  system(command)
+  return 0;
+}
+
 int main(int argc, char** argv)
 {
   bool f = false;
@@ -147,7 +155,7 @@ int main(int argc, char** argv)
         cout << "Time out" << endl;
       }
     }
-    usleep(2e4);
+    usleep(2e4); 
   }
 
   if(f)
